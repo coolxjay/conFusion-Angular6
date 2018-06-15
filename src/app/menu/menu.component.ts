@@ -1,20 +1,23 @@
-import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { Dish } from '../shared/dish';
+import { DishService } from '../services/dish.service';
 
 @Component({
-  selector: 'menu',
+  selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent {
+export class MenuComponent implements OnInit {
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches)
-    );
-    
-  constructor(private breakpointObserver: BreakpointObserver) {}
-  
+	dishes: Dish[] = null;
+
+  constructor(
+		private dishService: DishService
+	) { }
+
+  ngOnInit() {
+		this.dishes = this.dishService.getDishes();
   }
+	
+
+}
