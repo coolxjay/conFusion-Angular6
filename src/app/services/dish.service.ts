@@ -4,6 +4,7 @@ import { baseURL } from '../shared/baseurl';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { of as ObservableOf, Observable, throwError } from 'rxjs';
+import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,20 +12,21 @@ import { of as ObservableOf, Observable, throwError } from 'rxjs';
 export class DishService {
 
   constructor(
-		private http: HttpClient
+		private http: HttpClient,
+		private processHTTPMsgService: ProcessHTTPMsgService
 	) { }
 	
 	getDishes(): Observable<any> {
 		return this.http.get(baseURL + 'dishes')
 						.pipe(
-							catchError(e => throwError(e))	
+							catchError(e => { return this.processHTTPMsgService.handleError(e);})	
 						);
 	}
 	
 	getDish(id: number): Observable<any> {
 		return this.http.get(baseURL + 'dishes/' + id)
 				   .pipe(
-					 	catchError(e => throwError(e))
+					 	catchError(e => { return this.processHTTPMsgService.handleError(e);})
 					 );
 	}
 	
@@ -32,7 +34,7 @@ export class DishService {
 		return this.http.get(baseURL + 'dishes?featured=true')
 		 		   .pipe(
 					 	map(dishes => dishes[0]),
-					 	catchError(e => throwError(e))
+					 	catchError(e => { return this.processHTTPMsgService.handleError(e);})
 					 );
 	}
 }
