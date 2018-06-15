@@ -8,6 +8,10 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { AgmCoreModule } from '@agm/core';
+import { ApplicationRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { DishService } from './services/dish.service';
 import { LeaderService } from './services/leader.service';
@@ -54,7 +58,12 @@ import { ContactComponent } from './contact/contact.component';
 		HttpClientModule,
 		FlexLayoutModule,
 		AppRoutingModule,
-		MatProgressSpinnerModule
+		MatProgressSpinnerModule,
+		CommonModule,
+		FormsModule,
+		AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDfpyLehThhRhYPQtZyb1mNmBXfwb0lZsg'
+    })
   ],
   providers: [
 		DishService,
