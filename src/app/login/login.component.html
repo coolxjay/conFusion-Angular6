@@ -1,0 +1,24 @@
+<p>{{ user | json }}</p>
+
+<form novalidate (ngSubmit)="onSubmit()">
+	<mat-dialog-content>
+		
+		<mat-form-field>
+			<input matInput [(ngModel)]="user.username" placeholder="Username" name="username" required>
+		</mat-form-field>
+		
+		<mat-form-field>
+			<input matInput [(ngModel)]="user.password" placeholder="Enter your password" [type]="hide ? 'password' : 'text'" name="password" required>
+			<mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+  	</mat-form-field>
+		
+		<mat-checkbox [(ngModel)]="user.remember" name="remember">Remember Me</mat-checkbox>
+		
+	</mat-dialog-content>
+	
+  <mat-dialog-actions>
+    <span class="flex-spacer"></span>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button type="submit" mat-button class="background-primary text-floral-white" >Login</button>
+  </mat-dialog-actions>
+</form>
