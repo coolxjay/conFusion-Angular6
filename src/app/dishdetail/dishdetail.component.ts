@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Dish } from '../shared/dish';
 import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -22,7 +22,8 @@ export class DishdetailComponent implements OnInit {
 		private dishService: DishService,
 		private route: ActivatedRoute,
 		private location: Location,
-		private fb: FormBuilder
+		private fb: FormBuilder,
+		@Inject('BaseURL') public BaseURL
 	) {
 		this.createForm();
 	}
@@ -30,8 +31,8 @@ export class DishdetailComponent implements OnInit {
   ngOnInit() {
 		this.route.params
 		.pipe(
-			map((params:Params) => params['id'],
-			switchMap((id:number) => { return this.dishService.getDish(id); }))
+			map((params:Params) => params['id']),
+			switchMap((id:number) => this.dishService.getDish(id))
 		)
 		.subscribe(dish => this.dish = dish);
   }

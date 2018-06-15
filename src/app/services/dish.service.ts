@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Dish } from '../shared/dish';
-import { DISHES } from '../shared/dishes';
 import { baseURL } from '../shared/baseurl';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';

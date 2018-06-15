@@ -1,5 +1,5 @@
 export class Promotion {
-	 id: number;
+	 _id: string;
 	featured: boolean;
 	name: string;
 	image: string;
