@@ -17,6 +17,8 @@ export class ContactComponent implements OnInit {
 	feedbackForm: FormGroup;
   feedback: Feedback;
   contactType = ContactType;
+	
+	submitted: boolean = false;
   
   constructor(
 		private fb: FormBuilder,
@@ -44,7 +46,7 @@ export class ContactComponent implements OnInit {
     this.feedback = this.feedbackForm.value;
     this.feedbackService.postFeedback(this.feedback)
 		.subscribe(feedback => { 
-			console.log("Feedback submitted"); 
+			this.submitted = true;
 			this.feedbackForm.reset({
 				firstname: '',
 				lastname: '',
@@ -55,7 +57,7 @@ export class ContactComponent implements OnInit {
 				message: ''
 			});
 		}, (err) => {
-					// do nothing		 
+					this.submitted = false;
 		});
     
   }
