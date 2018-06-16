@@ -34,11 +34,11 @@
       <mat-list-item *ngFor="let comment of dish.comments">
         <h1 mat-line> {{comment.comment}}</h1>
         <h1 mat-line> {{comment.rating}} stars</h1>
-        <h1 mat-line> --{{comment.author}} {{comment.date | date:'MMM dd, yyyy'}}</h1>
+        <h1 mat-line> --{{comment.author.username}} {{comment.updatedAt | date:'MMM dd, yyyy'}}</h1>
       </mat-list-item>
     </mat-list>
 		
-		 
+		 <div *ngIf="username">
         <h3> Send us your Comment</h3>
         <p> {{commentForm.value | json}} {{commentForm.status | json }}</p>
         <form novalidate [formGroup]="commentForm" (ngSubmit)="onSubmit()">
@@ -61,6 +61,7 @@
 					</div>
         </form>
 		</div>
+	</div>
 
 
 </div>

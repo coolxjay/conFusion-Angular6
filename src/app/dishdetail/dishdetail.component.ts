@@ -6,6 +6,8 @@ import { DishService } from '../services/dish.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comment } from '../shared/comment';
 import { map, switchMap } from 'rxjs/operators';
+import { AuthService } from '../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dishdetail',
@@ -17,13 +19,16 @@ export class DishdetailComponent implements OnInit {
 	dish: Dish;
 	commentForm: FormGroup;
 	comment: Comment;
+	username: string = undefined;
+	subscription: Subscription;
 
   constructor(
 		private dishService: DishService,
 		private route: ActivatedRoute,
 		private location: Location,
 		private fb: FormBuilder,
-		@Inject('BaseURL') public BaseURL
+		@Inject('BaseURL') public BaseURL,
+		private authService: AuthService
 	) {
 		this.createForm();
 	}
@@ -34,8 +39,20 @@ export class DishdetailComponent implements OnInit {
 			map((params:Params) => params['id']),
 			switchMap((id:number) => this.dishService.getDish(id))
 		)
-		.subscribe(dish => this.dish = dish);
+		.subscribe(dish => {
+				this.dish = dish;
+				console.log("dish :", this.dish);
+	
+		});
+		this.subscription = this.authService.getUsername()
+	 	.subscribe(username => { this.username = username; console.log("username :", this.username); })
+		
   }
+	
+	ngOnDestroy() {
+		this.subscription.unsubscribe();
+		this.username = undefined;
+	}
 	
 	createForm() {
 		this.commentForm = this.fb.group({
@@ -48,12 +65,20 @@ export class DishdetailComponent implements OnInit {
 	onSubmit() {
 		this.comment = this.commentForm.value;
 		this.comment.date = Date.now();
-		console.log(this.comment);
-		this.commentForm.reset({
-			rating: 5,
-			name: '',
-			comment: ''
-		})
+		this.dishService.postComment(this.dish._id, this.comment)
+		.subscribe((dish) => {
+			this.commentForm.reset({
+				rating: 5,
+				name: '',
+				comment: ''
+			});
+			this.ngOnInit();
+		}, (err) => {
+			
+		});
+		
 	}
 
 }
+
+
