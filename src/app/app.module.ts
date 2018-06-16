@@ -19,6 +19,8 @@ import { LeaderService } from './services/leader.service';
 import { PromotionService } from './services/promotion.service';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 import { AuthService } from './services/auth.service';
+import { AuthInterceptor, UnauthorizedInterceptor } from './services/auth.interceptor';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import { baseURL } from './shared/baseurl';
 import 'hammerjs';
 
@@ -88,7 +90,20 @@ import { HighlightDirective } from './directives/highlight.directive';
 		PromotionService,
 		ProcessHTTPMsgService,
 		AuthService,
-		{provide: 'BaseURL', useValue: baseURL}
+		{
+		  provide: 'BaseURL', useValue: baseURL
+		},
+		{
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UnauthorizedInterceptor,
+      multi: true
+    }
+
 	],
 	 entryComponents: [
         LoginComponent
