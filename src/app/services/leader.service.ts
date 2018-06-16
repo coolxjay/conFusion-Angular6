@@ -22,7 +22,6 @@ export class LeaderService {
 					 	catchError(e => { return this.processHTTPMsgService.handleError(e);} )
 					 );
 	}
-	
 	getFeaturedLeader(): Observable<any> {
 		return this.http.get(baseURL + 'leaders?featured=true')
 				   .pipe(

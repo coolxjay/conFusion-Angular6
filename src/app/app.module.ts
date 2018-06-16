@@ -18,6 +18,7 @@ import { DishService } from './services/dish.service';
 import { LeaderService } from './services/leader.service';
 import { PromotionService } from './services/promotion.service';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
+import { AuthService } from './services/auth.service';
 import { baseURL } from './shared/baseurl';
 import 'hammerjs';
 
@@ -86,6 +87,7 @@ import { HighlightDirective } from './directives/highlight.directive';
 		LeaderService,
 		PromotionService,
 		ProcessHTTPMsgService,
+		AuthService,
 		{provide: 'BaseURL', useValue: baseURL}
 	],
 	 entryComponents: [
