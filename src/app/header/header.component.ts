@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit {
 
 	username: string = undefined;
+	admin: boolean = false;
 	subscription: Subscription;
 
   constructor(
@@ -22,8 +23,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 		this.authService.loadUserCredentials();
-		this.subscription = this.authService.getUsername()
-	 	.subscribe(username => { this.username = username; console.log("username :", this.username); })
+		this.subscription = this.authService.getUserInfo()
+	 	.subscribe(userInfo => { 
+			this.username = userInfo.username; 
+			this.admin = userInfo.admin; })
   }
 	
 	ngOnDestroy() {
@@ -36,6 +39,7 @@ export class HeaderComponent implements OnInit {
 	
 	logOut() {
 		this.username = undefined;
+		this.admin = false;
 		this.authService.logOut();
 	}
 

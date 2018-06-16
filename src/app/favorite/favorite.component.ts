@@ -26,7 +26,7 @@ export class FavoriteComponent implements OnInit {
 	
 	deleteFavorite(id: string) {
 		this.favoriteService.deleteFavorite(id)
-		.subscribe(favorite => this.ngOnInit()));
+		.subscribe((favorite) => this.ngOnInit());
 	}
-
+	
 }

@@ -24,7 +24,7 @@ export class FavoriteService {
 	}
 	
 	postFavorite(id: string): Observable<any> {
-		return this.http.post(baseURL + 'favorites/' + id)
+		return this.http.post(baseURL + 'favorites/' + id, {})
 						.pipe(
 							catchError(e => { return this.processHTTPMsgService.handleError(e);})	
 						);

@@ -47,8 +47,11 @@ export class DishdetailComponent implements OnInit {
 				console.log("dish :", this.dish);
 	
 		});
-		this.subscription = this.authService.getUsername()
-	 	.subscribe(username => { this.username = username; console.log("username :", this.username); })
+		this.subscription = this.authService.getUserInfo()
+	 	.subscribe(userInfo => { 
+								this.username = userInfo.username; 
+								console.log("username :", this.username); 
+							})
 		
   }
 	

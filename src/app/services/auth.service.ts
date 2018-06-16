@@ -4,6 +4,7 @@ import { map, catchError } from 'rxjs/operators';
 import { of as ObservableOf, Observable, throwError, Subject } from 'rxjs';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 import { baseURL } from '../shared/baseurl';
+import * as jwt_decode from 'jwt-decode';
 
 interface AuthResponse {
   status: string,
@@ -17,12 +18,17 @@ interface JWTResponse {
   user: any
 };
 
+interface UserInfo {
+	username: string,
+	admin: boolean
+}
+
 @Injectable()
 export class AuthService {
 
  tokenKey: string = 'JWT';
  isAuthenticated: Boolean = false;
- username: Subject<string> = new Subject<string>();
+ userInfo: Subject<UserInfo> = new Subject<UserInfo>();
  authToken: string = undefined;
 
   constructor(private http: HttpClient,
@@ -33,7 +39,7 @@ export class AuthService {
     this.http.get<JWTResponse>(baseURL + 'users/checkJWTToken')
     .subscribe(res => {
       console.log("JWT Token Valid: ", res);
-      this.sendUsername(res.user.username);
+      this.sendUserInfo({username: res.user.username, admin: res.user.admin});
     },
     err => {
       console.log("JWT Token invalid: ", err);
@@ -41,12 +47,12 @@ export class AuthService {
     })
   }
  
-  sendUsername(name: string) {
-    this.username.next(name);
+  sendUserInfo(userInfo: UserInfo) {
+    this.userInfo.next(userInfo);
   }
 
-  clearUsername() {
-    this.username.next(undefined);
+  clearUserInfo() {
+		this.userInfo.next({username: undefined, admin: false});
   }
 
   loadUserCredentials() {
@@ -66,14 +72,14 @@ export class AuthService {
   }
 
   useCredentials(credentials: any) {
-    this.isAuthenticated = true;
-    this.sendUsername(credentials.username);
+    this.isAuthenticated = true;		
+    this.sendUserInfo({ username: credentials.username, admin: jwt_decode(credentials.token).admin });
     this.authToken = credentials.token;
   }
 
   destroyUserCredentials() {
     this.authToken = undefined;
-    this.clearUsername();
+    this.clearUserInfo();
     this.isAuthenticated = false;
     localStorage.removeItem(this.tokenKey);
   }
@@ -102,11 +108,12 @@ export class AuthService {
     return this.isAuthenticated;
   }
 
-  getUsername(): Observable<string> {
-    return this.username.asObservable();
+  getUserInfo(): Observable<UserInfo> {
+    return this.userInfo.asObservable();
   }
 
   getToken(): string {
     return this.authToken;
   }
+	
 }

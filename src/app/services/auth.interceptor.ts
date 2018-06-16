@@ -33,7 +33,7 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
     return next
       .handle(req)
 			.pipe(
-				tap((event: HttpEvnet<any>) => {
+				tap((event: HttpEvent<any>) => {
 					// do nothing
 				}, (err: any) => {
 					if (err instanceof HttpErrorResponse) {
@@ -42,7 +42,7 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
 							authService.checkJWTtoken();
 						}
 					}
-				});
+				})
 			)
   }
 }
