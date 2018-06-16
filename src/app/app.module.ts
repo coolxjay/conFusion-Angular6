@@ -18,6 +18,7 @@ import { DishService } from './services/dish.service';
 import { LeaderService } from './services/leader.service';
 import { PromotionService } from './services/promotion.service';
 import { FeedbackService } from './services/feedback.service';
+import { FavoriteService } from './services/favorite.service';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 import { AuthService } from './services/auth.service';
 import { AuthInterceptor, UnauthorizedInterceptor } from './services/auth.interceptor';
@@ -35,6 +36,7 @@ import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
 import { HighlightDirective } from './directives/highlight.directive';
+import { FavoriteComponent } from './favorite/favorite.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { HighlightDirective } from './directives/highlight.directive';
     HomeComponent,
     ContactComponent,
     LoginComponent,
-    HighlightDirective
+    HighlightDirective,
+    FavoriteComponent
   ],
   imports: [
     BrowserModule,
@@ -90,6 +93,7 @@ import { HighlightDirective } from './directives/highlight.directive';
 		LeaderService,
 		PromotionService,
 		FeedbackService,
+		FavoriteService,
 		ProcessHTTPMsgService,
 		AuthService,
 		{

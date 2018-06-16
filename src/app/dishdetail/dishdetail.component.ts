@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Dish } from '../shared/dish';
-import { Params, ActivatedRoute } from '@angular/router';
+import { Params, ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { DishService } from '../services/dish.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -8,6 +8,7 @@ import { Comment } from '../shared/comment';
 import { map, switchMap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
+import { FavoriteService } from '../services/favorite.service';
 
 @Component({
   selector: 'app-dishdetail',
@@ -28,7 +29,9 @@ export class DishdetailComponent implements OnInit {
 		private location: Location,
 		private fb: FormBuilder,
 		@Inject('BaseURL') public BaseURL,
-		private authService: AuthService
+		private authService: AuthService,
+		private favoriteService: FavoriteService,
+		private router: Router
 	) {
 		this.createForm();
 	}
@@ -77,6 +80,15 @@ export class DishdetailComponent implements OnInit {
 			
 		});
 		
+	}
+	
+	addFavorite(dish: Dish) {
+		this.favoriteService.postFavorite(dish._id)
+		.subscribe(res => {
+			this.router.navigate(['/menu']);
+		}, (err) => {
+			// do nothing
+		});
 	}
 
 }
