@@ -6,6 +6,7 @@ import { HomeComponent } from '../home/home.component';
 import { AboutComponent } from '../about/about.component';
 import { ContactComponent } from '../contact/contact.component';
 import { FavoriteComponent } from '../favorite/favorite.component';
+import { AdminComponent } from '../admin/admin.component';
 
 export const routes: Routes = [
   { path: 'home',  component: HomeComponent },
@@ -14,5 +15,6 @@ export const routes: Routes = [
 	{ path: 'about',     component: AboutComponent },
 	{ path: 'dishdetail/:id', component: DishdetailComponent },
 	{ path: 'favorite', component: FavoriteComponent },
+	{ path: 'admin', component: AdminComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
