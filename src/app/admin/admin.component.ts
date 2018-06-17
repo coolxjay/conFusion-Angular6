@@ -3,6 +3,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort} from '@angular/material';
 import {merge, Observable, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+import { User } from '../shared/user';
+import { baseURL } from '../shared/baseurl';
 
 /**
  * @title Table retrieving data through HTTP
@@ -13,11 +15,11 @@ import {catchError, map, startWith, switchMap} from 'rxjs/operators';
   templateUrl: './admin.component.html',
 })
 export class AdminComponent implements OnInit {
-  displayedColumns = ['created', 'state', 'number', 'title'];
-  exampleDatabase: ExampleHttpDao | null;
-  data: GithubIssue[] = [];
+  displayedColumns = ['id', 'username', 'firstname', 'lastname', 'admin'];
+  database: Database | null;
+  data: User[] = [];
 
-  resultsLength = 0;
+	resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = false;
 
@@ -27,7 +29,7 @@ export class AdminComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.exampleDatabase = new ExampleHttpDao(this.http);
+    this.database = new Database(this.http);
 
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
@@ -37,16 +39,8 @@ export class AdminComponent implements OnInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.exampleDatabase!.getRepoIssues(
+          return this.database!.getUsers(
             this.sort.active, this.sort.direction, this.paginator.pageIndex);
-        }),
-        map(data => {
-          // Flip flag to show that loading has finished.
-          this.isLoadingResults = false;
-          this.isRateLimitReached = false;
-          this.resultsLength = data.total_count;
-
-          return data.items;
         }),
         catchError(() => {
           this.isLoadingResults = false;
@@ -58,27 +52,16 @@ export class AdminComponent implements OnInit {
   }
 }
 
-export interface GithubApi {
-  items: GithubIssue[];
+export interface UserApi {
+  users: User[];
   total_count: number;
 }
 
-export interface GithubIssue {
-  created_at: string;
-  number: string;
-  state: string;
-  title: string;
-}
-
 /** An example database that the data source uses to retrieve data for the table. */
-export class ExampleHttpDao {
+export class Database {
   constructor(private http: HttpClient) {}
-
-  getRepoIssues(sort: string, order: string, page: number): Observable<GithubApi> {
-    const href = 'https://api.github.com/search/issues';
-    const requestUrl =
-        `${href}?q=repo:angular/material2&sort=${sort}&order=${order}&page=${page + 1}`;
-
-    return this.http.get<GithubApi>(requestUrl);
-  }
+	
+	getUsers(sort: string, order: string, page: number): Observable<User[]> {
+		return this.http.get<User[]>(baseURL + 'users');
+	}
 }

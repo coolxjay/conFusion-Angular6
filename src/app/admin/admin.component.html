@@ -12,29 +12,33 @@
     <table mat-table [dataSource]="data" class="example-table"
            matSort matSortActive="created" matSortDisableClear matSortDirection="asc">
       <!-- Number Column -->
-      <ng-container matColumnDef="number">
-        <th mat-header-cell *matHeaderCellDef>#</th>
-        <td mat-cell *matCellDef="let row">{{ row.number }}</td>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let row">{{ row._id }}</td>
       </ng-container>
 
       <!-- Title Column -->
-      <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef>Title</th>
-        <td mat-cell *matCellDef="let row">{{ row.title }}</td>
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef>username</th>
+        <td mat-cell *matCellDef="let row">{{ row.username }}</td>
       </ng-container>
 
       <!-- State Column -->
-      <ng-container matColumnDef="state">
-        <th mat-header-cell *matHeaderCellDef>State</th>
-        <td mat-cell *matCellDef="let row">{{ row.state }}</td>
+      <ng-container matColumnDef="firstname">
+        <th mat-header-cell *matHeaderCellDef>firstname</th>
+        <td mat-cell *matCellDef="let row">{{ row.firstname }}</td>
       </ng-container>
 
-      <!-- Created Column -->
-      <ng-container matColumnDef="created">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true">
-          Created
-        </th>
-        <td mat-cell *matCellDef="let row">{{ row.created_at | date }}</td>
+ <!-- Title Column -->
+      <ng-container matColumnDef="lastname">
+        <th mat-header-cell *matHeaderCellDef>lastname</th>
+        <td mat-cell *matCellDef="let row">{{ row.lastname }}</td>
+      </ng-container>
+
+      <!-- State Column -->
+      <ng-container matColumnDef="admin">
+        <th mat-header-cell *matHeaderCellDef>admin</th>
+        <td mat-cell *matCellDef="let row">{{ row.admin }}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
