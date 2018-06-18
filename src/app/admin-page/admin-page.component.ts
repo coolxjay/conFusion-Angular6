@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'admin-page',
@@ -9,12 +6,10 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./admin-page.component.css']
 })
 export class AdminPageComponent {
-
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches)
-    );
-    
-  constructor(private breakpointObserver: BreakpointObserver) {}
-  
-  }
+  cards = [
+    { title: 'User Information', cols: 1, rows: 1, link: '/userPage' },
+    { title: 'Dish Information', cols: 1, rows: 1, link: ''},
+    { title: 'Card 3', cols: 1, rows: 1, link: ''},
+    { title: 'Card 4', cols: 1, rows: 1, link: '' }
+  ];
+}
