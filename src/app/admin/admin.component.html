@@ -1,8 +1,7 @@
 
 <div class="example-container mat-elevation-z8">
   <div class="example-table-container">
-    <table mat-table [dataSource]="data" class="example-table"
-           matSort matSortActive="created" matSortDisableClear matSortDirection="asc">
+    <table mat-table [dataSource]="dataSource">
       <!-- Number Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>ID</th>
