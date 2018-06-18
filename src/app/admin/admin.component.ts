@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../shared/user';
 import { UserService } from '../services/user.service';
-import {MatTableDataSource} from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-admin',
@@ -10,15 +10,29 @@ import {MatTableDataSource} from '@angular/material';
 })
 export class AdminComponent implements OnInit {
   displayedColumns = ['id', 'username', 'firstname', 'lastname', 'admin'];
-  dataSource: User[] = [];
+  dataSource: any;
 
   constructor(
 		private userService: UserService	
 	) {}
+	
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild(MatSort) sort: MatSort;
+	
+	applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
 
   ngOnInit() {
 		this.userService.getUsers()
-		.subscribe(data => this.dataSource = data);
+		.subscribe(data => { 
+			this.dataSource = new MatTableDataSource(data);		
+			this.dataSource.paginator = this.paginator;
+			this.dataSource.sort = this.sort;
+		});
+		
   }
 }
 
