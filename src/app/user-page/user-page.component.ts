@@ -4,11 +4,11 @@ import { UserService } from '../services/user.service';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
-  selector: 'app-admin',
-  styleUrls: ['./admin.component.scss'],
-  templateUrl: './admin.component.html',
+  selector: 'app-user-page',
+  styleUrls: ['./user-page.component.scss'],
+  templateUrl: './user-page.component.html',
 })
-export class AdminComponent implements OnInit {
+export class UserPageComponent implements OnInit {
   displayedColumns = ['id', 'username', 'firstname', 'lastname', 'admin'];
   dataSource: any;
 

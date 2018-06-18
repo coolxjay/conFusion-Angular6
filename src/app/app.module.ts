@@ -38,7 +38,8 @@ import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
 import { HighlightDirective } from './directives/highlight.directive';
 import { FavoriteComponent } from './favorite/favorite.component';
-import { AdminComponent } from './admin/admin.component';
+import { UserPageComponent } from './user-page/user-page.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { AdminComponent } from './admin/admin.component';
     LoginComponent,
     HighlightDirective,
     FavoriteComponent,
-    AdminComponent
+    UserPageComponent,
+    AdminPageComponent
   ],
   imports: [
     BrowserModule,
