@@ -5,7 +5,6 @@ import { DishService } from '../services/dish.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 
-
 @Component({
   selector: 'app-add-dish',
   templateUrl: './add-dish.component.html',
@@ -15,8 +14,9 @@ export class AddDishComponent implements OnInit {
 
 	dishForm: FormGroup;
 	dish: Dish;
-	submitted: boolean = false;
-
+	dialogRef: MatDialogRef<ImageUploadComponent>
+	image: string = undefined;
+	
   constructor(
 		private fb: FormBuilder,
 		private dishService: DishService,
@@ -53,13 +53,12 @@ export class AddDishComponent implements OnInit {
 			featured: false,
 			category: ''
 		});
-		//this.submitted = false;
 	}
 	
 	openImageForm(): void {
-		this.dialog.open(ImageUploadComponent, {width: '500px', height: '450px' });
+		this.dialogRef = this.dialog.open(ImageUploadComponent, {width: '500px', height: '450px' });
+		this.dialogRef.componentInstance.addImage
+		.subscribe(name => this.image = name);
 	}
 	
 }
-
-

@@ -1,12 +1,15 @@
 <form novalidate [formGroup]="dishForm" (ngSubmit)="onSubmit()">
-	<p>
-  	<mat-form-field class="half-width" hintLabel="more than 2 letters & less than 25">
-    	<input matInput formControlName="name" placeholder="name" type="text" required>
-    </mat-form-field>
-   
-			<a mat-button (click)="openImageForm()"><span class="fa fa-sign-in fa-lg"></span> ImageUpload</a>
-   
-    </p>
+	
+  		<mat-form-field class="half-width" hintLabel="more than 2 letters & less than 25">
+    		<input matInput formControlName="name" placeholder="name" type="text" required>
+    	</mat-form-field>
+   		<div *ngIf="!image">
+				<a mat-button (click)="openImageForm()"><span class="fa fa-sign-in fa-lg"></span> ImageUpload</a>
+			</div>
+			<div *ngIf="image">
+					{{image}}
+			</div>
+	
     <p>
     	<mat-form-field class="half-width" hintLabel="price">
       	<input matInput formControlName="price" placeholder="price" type="number" required>
