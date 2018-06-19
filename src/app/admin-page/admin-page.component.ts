@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AdminPageComponent {
   cards = [
     { title: 'User Information', cols: 1, rows: 1, link: '/userPage' },
-    { title: 'Dish Information', cols: 1, rows: 1, link: ''},
+    { title: 'Dish Information', cols: 1, rows: 1, link: '/dishPage'},
     { title: 'Card 3', cols: 1, rows: 1, link: ''},
     { title: 'Card 4', cols: 1, rows: 1, link: '' }
   ];

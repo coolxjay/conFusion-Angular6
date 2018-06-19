@@ -1,0 +1,33 @@
+<form novalidate [formGroup]="dishForm" (ngSubmit)="onSubmit()">
+	<p>
+  	<mat-form-field class="half-width" hintLabel="more than 2 letters & less than 25">
+    	<input matInput formControlName="name" placeholder="name" type="text" required>
+    </mat-form-field>
+   
+			<a mat-button (click)="openImageForm()"><span class="fa fa-sign-in fa-lg"></span> ImageUpload</a>
+   
+    </p>
+    <p>
+    	<mat-form-field class="half-width" hintLabel="price">
+      	<input matInput formControlName="price" placeholder="price" type="number" required>
+      </mat-form-field>
+      <mat-form-field class="half-width" hintLabel="label">
+        <input matInput formControlName="label" placeholder="label" type="text" required>
+      </mat-form-field>
+    </p>
+		<p>
+      <mat-form-field class="half-width" hintLabel="category">
+				<input matInput formControlName="category" placeholder="category" type="text" required>
+      </mat-form-field>
+      <mat-slide-toggle formControlName="featured">Featured?</mat-slide-toggle>
+    </p>
+    <p>
+			<mat-form-field class="full-width" hintLabel="more than 2 letters & less than 25">
+      	<textarea matInput formControlName="description" placeholder="description" rows=12></textarea>
+      </mat-form-field>
+    </p>
+		<div *ngIf="!dishForm.invalid">
+      <button type="submit" mat-raised-button class="background-primary text-floral-white">Submit
+      </button>
+		</div>
+</form>

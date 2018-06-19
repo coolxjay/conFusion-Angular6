@@ -13,6 +13,7 @@ import { ApplicationRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { DishService } from './services/dish.service';
 import { LeaderService } from './services/leader.service';
@@ -40,6 +41,9 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { DishPageComponent } from './dish-page/dish-page.component';
+import { AddDishComponent } from './add-dish/add-dish.component';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,10 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
     HighlightDirective,
     FavoriteComponent,
     UserPageComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    DishPageComponent,
+    AddDishComponent,
+    ImageUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -89,6 +96,7 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 		CommonModule,
 		FormsModule,
 		ReactiveFormsModule,
+		FileUploadModule,
 		AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDfpyLehThhRhYPQtZyb1mNmBXfwb0lZsg'
     })
@@ -118,7 +126,8 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 
 	],
 	 entryComponents: [
-        LoginComponent
+   	LoginComponent,
+		ImageUploadComponent		
   ],
   bootstrap: [AppComponent]
 })

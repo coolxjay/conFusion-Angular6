@@ -8,6 +8,8 @@ import { ContactComponent } from '../contact/contact.component';
 import { FavoriteComponent } from '../favorite/favorite.component';
 import { UserPageComponent } from '../user-page/user-page.component';
 import { AdminPageComponent } from '../admin-page/admin-page.component';
+import { DishPageComponent } from '../dish-page/dish-page.component';
+import { AddDishComponent } from '../add-dish/add-dish.component';
 
 export const routes: Routes = [
   { path: 'home',  component: HomeComponent },
@@ -18,5 +20,7 @@ export const routes: Routes = [
 	{ path: 'favorite', component: FavoriteComponent },
 	{ path: 'adminPage', component: AdminPageComponent },
 	{ path: 'userPage', component: UserPageComponent },
+	{ path: 'dishPage', component: DishPageComponent },
+	{ path: 'addDish', component: AddDishComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
