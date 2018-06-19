@@ -41,8 +41,19 @@ export class DishService {
 	postComment(dishId: string, comment: any) {
 		return this.http.post(baseURL + 'dishes/' + dishId + '/comments', comment)
 						.pipe(
-					 	map(dishes => dishes[0]),
-					 	catchError(e => { return this.processHTTPMsgService.handleError(e);})
+							map(dishes => dishes[0]),
+							catchError(e => { 
+								return this.processHTTPMsgService.handleError(e);
+							})
 					 );
+	}
+	
+	postDish(dish: Dish): Observable<any> {
+		return this.http.post(baseURL + 'dishes/', dish)
+						.pipe(
+							catchError(e => {
+								return this.processHTTPMsgService.handleError(e); 
+							})
+						)
 	}
 }

@@ -1,18 +1,15 @@
+<br>
 <form novalidate [formGroup]="dishForm" (ngSubmit)="onSubmit()">
-	
+		<p>
   		<mat-form-field class="half-width" hintLabel="more than 2 letters & less than 25">
     		<input matInput formControlName="name" placeholder="name" type="text" required>
     	</mat-form-field>
-   		<div *ngIf="!image">
-				<a mat-button (click)="openImageForm()"><span class="fa fa-sign-in fa-lg"></span> ImageUpload</a>
-			</div>
-			<div *ngIf="image">
-					{{image}}
-			</div>
+			<a mat-button (click)="openImageForm()"><span class="fa fa-sign-in fa-lg"></span> ImageUpload</a>
+		</p>
 	
     <p>
     	<mat-form-field class="half-width" hintLabel="price">
-      	<input matInput formControlName="price" placeholder="price" type="number" required>
+      	<input matInput formControlName="price" placeholder="price" type="text" required>
       </mat-form-field>
       <mat-form-field class="half-width" hintLabel="label">
         <input matInput formControlName="label" placeholder="label" type="text" required>
@@ -25,12 +22,17 @@
       <mat-slide-toggle formControlName="featured">Featured?</mat-slide-toggle>
     </p>
     <p>
-			<mat-form-field class="full-width" hintLabel="more than 2 letters & less than 25">
+			<mat-form-field class="full-width" hintLabel="more than 2 letters & less than 50">
       	<textarea matInput formControlName="description" placeholder="description" rows=12></textarea>
       </mat-form-field>
     </p>
-		<div *ngIf="!dishForm.invalid">
-      <button type="submit" mat-raised-button class="background-primary text-floral-white">Submit
+		<div *ngIf="!dishForm.invalid && image">
+    	<button type="submit" mat-raised-button class="background-primary text-floral-white">Submit
       </button>
 		</div>
+		<div *ngIf="isSubmitted">
+			Dish Successfully Submitted
+			{{dish}}
+		</div>
 </form>
+
