@@ -4,6 +4,7 @@ import { Dish } from '../shared/dish';
 import { DishService } from '../services/dish.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
+import { UploadEvent, UploadFile } from 'ngx-file-drop';
 
 @Component({
   selector: 'app-add-dish',
@@ -17,6 +18,7 @@ export class AddDishComponent implements OnInit {
 	dialogRef: MatDialogRef<ImageUploadComponent>
 	image: string = undefined;
 	isSubmitted: boolean = false;
+	public files: UploadFile[] = [];
 	
   constructor(
 		private fb: FormBuilder,
@@ -69,5 +71,50 @@ export class AddDishComponent implements OnInit {
 		this.dialogRef.componentInstance.addImage
 		.subscribe(name => this.image = 'images/' + name);
 	}
+	
+	public dropped(event: UploadEvent) {
+    this.files = event.files;
+    for (const droppedFile of event.files) {
+ 
+      // Is it a file?
+      if (droppedFile.fileEntry.isFile) {
+        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+        fileEntry.file((file: File) => {
+ 
+          // Here you can access the real file
+          console.log(droppedFile.relativePath, file);
+ 
+          /**
+          // You could upload it like this:
+          const formData = new FormData()
+          formData.append('logo', file, relativePath)
+ 
+          // Headers
+          const headers = new HttpHeaders({
+            'security-token': 'mytoken'
+          })
+ 
+          this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
+          .subscribe(data => {
+            // Sanitized logo returned from backend
+          })
+          **/
+ 
+        });
+      } else {
+        // It was a directory (empty directories are added, otherwise only files)
+        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+        console.log(droppedFile.relativePath, fileEntry);
+      }
+    }
+  }
+ 
+  public fileOver(event){
+    console.log(event);
+  }
+ 
+  public fileLeave(event){
+    console.log(event);
+  }
 	
 }

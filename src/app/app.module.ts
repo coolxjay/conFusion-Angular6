@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FileUploadModule } from 'ng2-file-upload';
+import { FileDropModule } from 'ngx-file-drop';
 
 import { DishService } from './services/dish.service';
 import { LeaderService } from './services/leader.service';
@@ -97,6 +98,7 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
 		FormsModule,
 		ReactiveFormsModule,
 		FileUploadModule,
+		FileDropModule,
 		AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDfpyLehThhRhYPQtZyb1mNmBXfwb0lZsg'
     })
