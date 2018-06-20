@@ -6,7 +6,6 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { UploadEvent, UploadFile, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { FileService } from '../services/file.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-dish',
