@@ -60,3 +60,12 @@ File Drag and Drop
     </div>
 </div>
 
+<p></p>
+Dish JSON format File Upload
+<br>
+	<input id="cin" name="cin" type="file" (change)="fileChangeEvent($event)" placeholder="Upload a Dish file in JSON format"/>
+	<button type="button" class="btn btn-success btn-s" (click)="uploadDishesInFile()">
+		<i class="glyphicon glyphicon-open-file"></i>&nbsp;Upload
+	</button>
+<p></p>
+<br>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Dish } from '../shared/dish';
 import { DishService } from '../services/dish.service';
@@ -6,6 +6,7 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { UploadEvent, UploadFile, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { FileService } from '../services/file.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-dish',
@@ -20,6 +21,9 @@ export class AddDishComponent implements OnInit {
 	image: string = undefined;
 	isSubmitted: boolean = false;
 	public files: UploadFile[] = [];
+	filesToUpload: Array<File> = [];
+	files: Array<File> = this.filesToUpoload;
+	dishes: Dish[] = [];
 	
   constructor(
 		private fb: FormBuilder,
@@ -31,6 +35,7 @@ export class AddDishComponent implements OnInit {
 	}
 
   ngOnInit() {
+		 
   }
 	
 	createForm(): void {
@@ -107,5 +112,30 @@ export class AddDishComponent implements OnInit {
   public fileLeave(event){
     console.log(event);
   }
+	
+	//********************************
+	uploadDishesInFile(): void {
+		var self = this;
+		self.files = self.filesToUpload;
+		var reader = new FileReader();
+		reader.readAsText(this.files[0]);
+		
+		reader.onload = function(e) {
+			self.dishes = JSON.parse(e.target.result);
+			self.sendDishInfo(self.dishes);
+		}
+	}
+	
+	fileChangeEvent(fileInput: any) {
+		this.filesToUpload = <Array<File>>fileInput.target.files;
+	}
+	
+	sendDishInfo(dishes: Dish[]): void {
+		for(var i=0; i<dishes.length; i++) {
+			this.dishService.postDish(dishes[i])
+			.subscribe(dish => console.log(dish));
+		}
+	}
+	
 	
 }
