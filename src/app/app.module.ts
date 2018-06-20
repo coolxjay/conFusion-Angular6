@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FileUploadModule } from 'ng2-file-upload';
 import { FileDropModule } from 'ngx-file-drop';
+import { FileService } from './services/file.service';
 
 import { DishService } from './services/dish.service';
 import { LeaderService } from './services/leader.service';
@@ -112,6 +113,7 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
 		UserService,
 		ProcessHTTPMsgService,
 		AuthService,
+		FileService,
 		{
 		  provide: 'BaseURL', useValue: baseURL
 		},

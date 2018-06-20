@@ -4,7 +4,8 @@ import { Dish } from '../shared/dish';
 import { DishService } from '../services/dish.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
-import { UploadEvent, UploadFile } from 'ngx-file-drop';
+import { UploadEvent, UploadFile, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
+import { FileService } from '../services/file.service';
 
 @Component({
   selector: 'app-add-dish',
@@ -23,7 +24,8 @@ export class AddDishComponent implements OnInit {
   constructor(
 		private fb: FormBuilder,
 		private dishService: DishService,
-		private dialog: MatDialog
+		private dialog: MatDialog,
+		private fileService: FileService
 	) { 
 		this.createForm();
 	}
@@ -80,26 +82,15 @@ export class AddDishComponent implements OnInit {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
- 
-          // Here you can access the real file
-          console.log(droppedFile.relativePath, file);
- 
-          /**
-          // You could upload it like this:
-          const formData = new FormData()
-          formData.append('logo', file, relativePath)
- 
-          // Headers
-          const headers = new HttpHeaders({
-            'security-token': 'mytoken'
-          })
- 
-          this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
-          .subscribe(data => {
-            // Sanitized logo returned from backend
-          })
-          **/
- 
+					const formData = new FormData();
+					formData.append('imageFile', file, droppedFile.relativePath);
+					this.fileService.postFile(formData)
+					.subscribe(data => {
+						console.log("Data :", data);
+					}, (errHTML) => {
+						const filename = errHTML.split('<h1>')[1].split('</h1>')[0];
+						console.log("Failed on :", filename;
+					});
         });
       } else {
         // It was a directory (empty directories are added, otherwise only files)
