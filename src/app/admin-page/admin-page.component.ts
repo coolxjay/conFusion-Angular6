@@ -9,7 +9,7 @@ export class AdminPageComponent {
   cards = [
     { title: 'User Information', cols: 1, rows: 1, link: '/userPage' },
     { title: 'Dish Information', cols: 1, rows: 1, link: '/dishPage'},
-    { title: 'Card 3', cols: 1, rows: 1, link: ''},
+    { title: 'Sample Video', cols: 1, rows: 1, link: '/video'},
     { title: 'Card 4', cols: 1, rows: 1, link: '' }
   ];
 }

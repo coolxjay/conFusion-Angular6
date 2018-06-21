@@ -46,6 +46,7 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { DishPageComponent } from './dish-page/dish-page.component';
 import { AddDishComponent } from './add-dish/add-dish.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { VideoComponent } from './video/video.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
     AdminPageComponent,
     DishPageComponent,
     AddDishComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    VideoComponent
   ],
   imports: [
     BrowserModule,

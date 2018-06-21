@@ -10,6 +10,7 @@ import { UserPageComponent } from '../user-page/user-page.component';
 import { AdminPageComponent } from '../admin-page/admin-page.component';
 import { DishPageComponent } from '../dish-page/dish-page.component';
 import { AddDishComponent } from '../add-dish/add-dish.component';
+import { VideoComponent } from '../video/video.component';
 
 export const routes: Routes = [
   { path: 'home',  component: HomeComponent },
@@ -22,5 +23,6 @@ export const routes: Routes = [
 	{ path: 'userPage', component: UserPageComponent },
 	{ path: 'dishPage', component: DishPageComponent },
 	{ path: 'addDish', component: AddDishComponent },
+	{ path: 'video', component: VideoComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
