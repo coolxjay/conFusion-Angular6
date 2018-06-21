@@ -1,10 +1,8 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { baseURL } from '../shared/baseurl';
 import {  FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { of as ObservableOf, Observable, throwError, Subject } from 'rxjs';
-
-const URL = baseURL + 'imageUpload';
 
 @Component({
   selector: 'app-image-upload',
@@ -13,11 +11,12 @@ const URL = baseURL + 'imageUpload';
 })
 export class ImageUploadComponent implements OnInit {
 
-	public uploader:FileUploader = new FileUploader({url: URL, itemAlias: 'imageFile'});
+	public uploader:FileUploader = new FileUploader({url: this.BaseURL+'images', itemAlias: 'imageFile'});
 	public addImage: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
-		public dialogRef: MatDialogRef<ImageUploadComponent>
+		public dialogRef: MatDialogRef<ImageUploadComponent>,
+		@Inject('BaseURL') private BaseURL
 	) { }
 
   ngOnInit() {

@@ -19,9 +19,13 @@ export class AddDishComponent implements OnInit {
 	dialogRef: MatDialogRef<ImageUploadComponent>
 	image: string = undefined;
 	isSubmitted: boolean = false;
+	
+	// For Dish JSON format file Upload
 	public files: UploadFile[] = [];
 	filesToUpload: Array<File> = [];
-	files: Array<File> = this.filesToUpoload;
+	
+	// For Image Drop Zone
+	
 	dishes: Dish[] = [];
 	
   constructor(
@@ -78,8 +82,9 @@ export class AddDishComponent implements OnInit {
 		.subscribe(name => this.image = 'images/' + name);
 	}
 	
+	
+	/***************** File Drop Zone ********************/
 	public dropped(event: UploadEvent) {
-    this.files = event.files;
     for (const droppedFile of event.files) {
  
       // Is it a file?
@@ -88,12 +93,12 @@ export class AddDishComponent implements OnInit {
         fileEntry.file((file: File) => {
 					const formData = new FormData();
 					formData.append('imageFile', file, droppedFile.relativePath);
-					this.fileService.postFile(formData)
+					this.fileService.postImageFile(formData)
 					.subscribe(data => {
 						console.log("Data :", data);
 					}, (errHTML) => {
 						const filename = errHTML.split('<h1>')[1].split('</h1>')[0];
-						console.log("Failed on :", filename;
+						console.log("Failed on :", filename);
 					});
         });
       } else {
@@ -112,15 +117,14 @@ export class AddDishComponent implements OnInit {
     console.log(event);
   }
 	
-	//********************************
+	//********************************//
 	uploadDishesInFile(): void {
 		var self = this;
-		self.files = self.filesToUpload;
 		var reader = new FileReader();
-		reader.readAsText(this.files[0]);
+		reader.readAsText(self.filesToUpload[0]);
 		
 		reader.onload = function(e) {
-			self.dishes = JSON.parse(e.target.result);
+			self.dishes = JSON.parse(reader.result);
 			self.sendDishInfo(self.dishes);
 		}
 	}

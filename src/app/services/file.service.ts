@@ -15,8 +15,8 @@ export class FileService {
 		private processHTTPMsgService: ProcessHTTPMsgService
 	) { }
 	
-	postFile(formData: FormData): Observable<any> {
-		return this.http.post(baseURL + 'imageUpload', formData)
+	postImageFile(formData: FormData): Observable<any> {
+		return this.http.post(baseURL + 'images', formData)
 		.pipe(
 					 	catchError(e => { return this.processHTTPMsgService.handleError(e);})
 					 );
