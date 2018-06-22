@@ -85,6 +85,9 @@ export class AddDishComponent implements OnInit {
 	
 	/***************** File Drop Zone ********************/
 	public dropped(event: UploadEvent) {
+		// in case of wanting only single file allowed
+		// show warning message and remove all files from event.files
+	
     for (const droppedFile of event.files) {
  
       // Is it a file?

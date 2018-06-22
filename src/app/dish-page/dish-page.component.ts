@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 
 @Component({
   selector: 'dish-page',
@@ -12,4 +12,8 @@ export class DishPageComponent {
     { title: 'Card 3', cols: 1, rows: 1, link: '' },
     { title: 'Card 4', cols: 1, rows: 1, link: '' }
   ];
+	
+	constructor(
+		@Inject('BaseURL') public BaseURL
+	) {}
 }

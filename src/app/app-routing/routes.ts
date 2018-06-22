@@ -11,6 +11,9 @@ import { AdminPageComponent } from '../admin-page/admin-page.component';
 import { DishPageComponent } from '../dish-page/dish-page.component';
 import { AddDishComponent } from '../add-dish/add-dish.component';
 import { VideoComponent } from '../video/video.component';
+import { AddVideoComponent } from '../add-video/add-video.component';
+import { VideoPageComponent } from '../video-page/video-page.component';
+import { ShowVideoComponent } from '../show-video/show-video.component';
 
 export const routes: Routes = [
   { path: 'home',  component: HomeComponent },
@@ -24,5 +27,8 @@ export const routes: Routes = [
 	{ path: 'dishPage', component: DishPageComponent },
 	{ path: 'addDish', component: AddDishComponent },
 	{ path: 'video', component: VideoComponent },
+	{ path: 'addVideo', component: AddVideoComponent },
+	{ path: 'videoPage', component: VideoPageComponent },
+	{ path: 'showVideo', component: ShowVideoComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

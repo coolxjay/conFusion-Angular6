@@ -47,6 +47,9 @@ import { DishPageComponent } from './dish-page/dish-page.component';
 import { AddDishComponent } from './add-dish/add-dish.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { VideoComponent } from './video/video.component';
+import { AddVideoComponent } from './add-video/add-video.component';
+import { VideoPageComponent } from './video-page/video-page.component';
+import { ShowVideoComponent } from './show-video/show-video.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,10 @@ import { VideoComponent } from './video/video.component';
     DishPageComponent,
     AddDishComponent,
     ImageUploadComponent,
-    VideoComponent
+    VideoComponent,
+    AddVideoComponent,
+    VideoPageComponent,
+    ShowVideoComponent
   ],
   imports: [
     BrowserModule,
