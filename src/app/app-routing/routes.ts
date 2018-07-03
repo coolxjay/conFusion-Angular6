@@ -14,6 +14,7 @@ import { VideoComponent } from '../video/video.component';
 import { AddVideoComponent } from '../add-video/add-video.component';
 import { VideoPageComponent } from '../video-page/video-page.component';
 import { ShowVideoComponent } from '../show-video/show-video.component';
+import { ScreenRecorderComponent } from '../screen-recorder/screen-recorder.component';
 
 export const routes: Routes = [
   { path: 'home',  component: HomeComponent },
@@ -30,5 +31,6 @@ export const routes: Routes = [
 	{ path: 'addVideo', component: AddVideoComponent },
 	{ path: 'videoPage', component: VideoPageComponent },
 	{ path: 'showVideo', component: ShowVideoComponent },
+	{ path: 'recordScreen', component: ScreenRecorderComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

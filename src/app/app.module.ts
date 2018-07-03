@@ -50,6 +50,7 @@ import { VideoComponent } from './video/video.component';
 import { AddVideoComponent } from './add-video/add-video.component';
 import { VideoPageComponent } from './video-page/video-page.component';
 import { ShowVideoComponent } from './show-video/show-video.component';
+import { ScreenRecorderComponent } from './screen-recorder/screen-recorder.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { ShowVideoComponent } from './show-video/show-video.component';
     VideoComponent,
     AddVideoComponent,
     VideoPageComponent,
-    ShowVideoComponent
+    ShowVideoComponent,
+    ScreenRecorderComponent
   ],
   imports: [
     BrowserModule,
